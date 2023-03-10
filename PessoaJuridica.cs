@@ -9,17 +9,18 @@ namespace M01S05_Exercício
     {
         public string RazaoSocial { get; set; }
         public string CNPJ { get; set; }
-        public DateTime DataFundacao { get; set; } 
+       
+        public PessoaJuridica()
+       {
 
-        public PessoaJuridica(string razaoSocial, string cnpj, DateTime dataFundacao, int numeroConta, string email, string telefone,string end, string tipoConta) : base (email, telefone, end, numeroConta, tipoConta)
+       }
+
+        public PessoaJuridica(string razaoSocial, string cnpj, DateTime dataNascimento, int numeroConta, string email, string telefone,string end) : base (email, telefone, end, numeroConta)
         {
             RazaoSocial = razaoSocial;
-            CNPJ = cnpj;
-            DataFundacao = dataFundacao;
+            CNPJ = cnpj;            
 
         }
-        public override void ResumoCliente(){ 
-        Console.WriteLine($"{NumeroConta}  | {RazaoSocial} |  {CNPJ}  ");
-        } 
+        public override string ResumoCliente() => $"{base.ResumoCliente} | {RazaoSocial} | {CNPJ}";
     }
 }
