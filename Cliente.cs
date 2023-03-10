@@ -15,42 +15,32 @@ namespace M01S05_Exercício
         //public DateTime DataNascimento { get; set; } ---- Enviado para PF
         public int NumeroConta { get; set; }
         
-        public string TipoConta { get; set; } //adicionar por causa do PJ
-        
         public double Saldo {  get {return GetSaldo(); }  private set{} }
 
         //public int Idade { get {return (int)(Math.Floor((DateTime.Now - DataNascimento).TotalDays / 365.25)); } private set {} } ---- Enviado para PF
         
-        public List<Transacao> Extrato { get; set; }
+        public List<Transacao> Extrato { get; set; } = new List<Transacao>();
 
         public Cliente()
         {
-            Extrato = new List<Transacao>();
+         
         }
-        public Cliente(string email, string telefone, string end, int numeroConta, string tipoConta) :this()
+        public Cliente(string email, string telefone, string end, int numeroConta) :this()
         {
             Email=email;
             Telefone =telefone; 
             Endereco = end;
-            NumeroConta = numeroConta;
-            TipoConta = tipoConta;
+            NumeroConta = numeroConta;          
         }
 
 
-        public virtual void ResumoCliente(){ //metodo que vai herdar as filhas
-           Console.WriteLine($"{NumeroConta} |  {TipoConta}  | {Saldo}");
-        }
+        public virtual string ResumoCliente() => $"{NumeroConta}";
+
+        private double GetSaldo() => Extrato.Sum(x => x.Valor);
 
         //public bool EhMaior(){
           //  return Idade >= 18;
         //} ---- Enviado para PF
-
-        private double GetSaldo(){
-            double saldo = 0;
-            foreach(Transacao transacao  in Extrato){
-                saldo += transacao.Valor;
-            }
-            return saldo;
-        }
+        
     }
 }
